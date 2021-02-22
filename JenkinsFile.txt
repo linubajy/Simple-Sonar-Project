@@ -16,13 +16,13 @@ pipeline{
         }
         stage('Sonar Analysis'){
             steps{
-                 dir("C:/Users/roshe/.jenkins/workspace/JenkinChallenge/SimpleSonarProject"){
+                 
                     withSonarQubeEnv('Sonar'){
                         withMaven(maven:'maven'){
                             sh 'mvn sonar:sonar'
                         }
                         
-                  }
+                  
                 }
             }
             
