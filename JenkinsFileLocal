@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+    tools{
+        maven 'maven'
+        jdk 'Jdk'
+    }
+    stages{
+        stage('Fetch') {
+            steps {
+               sh 'echo $JOB_NAME'
+                sh 'echo $BUILD_NUMBER'
+                sh 'echo Fetch'
+               git branch: 'master', url: 'https://github.com/roshenreji/Simple-Sonar-Project.git'
+            }
+        }
+        stage('Sonar Analysis'){
+            steps{
+                
+
+                    withSonarQubeEnv('Sonar'){
+                        withMaven(maven:'maven'){
+                            sh 'mvn sonar:sonar'
+                        }
+
+                  }
+
+                
+            }
+
+        }
+    }
+}
